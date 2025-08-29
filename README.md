@@ -7,6 +7,21 @@ A [web application](https://exams.guygregory.com) that automatically tracks and 
 
 <img width="411" height="143" alt="image" src="https://github.com/user-attachments/assets/cc54bb0e-6c02-4177-b93f-d6b552b275dd" />
 
+## What is VisualizeCerts?
+
+**TL;DR**: An automated certification tracking dashboard that visualizes your Microsoft exam progress and Credly badges with AI-powered recommendations for your next certification steps.
+
+**Purpose**: Many professionals pursuing Microsoft certifications struggle to track their progress across multiple platforms and identify logical next steps in their certification journey. VisualizeCerts solves this by automatically aggregating certification data from Microsoft Learn transcripts and Credly digital badges, then presenting it as an interactive timeline with intelligent AI recommendations for future exams.
+
+**Overview**: This system connects to two primary data sources to build a comprehensive view of your certification achievements. For Microsoft exams, it fetches data from [Microsoft Learn public transcripts](https://learn.microsoft.com) using their API endpoint, extracting passed exam information including titles, numbers, and completion dates. For broader industry recognition, it pulls digital badge data from [Credly public profiles](https://www.credly.com), capturing badge titles, issuers, and earned dates. The crown jewel is the AI recommendation engine powered by OpenAI's GPT-4o model (via GitHub Models), which analyzes your exam history and suggests the next logical Microsoft certification based on your progress and current technology trends.
+
+**Technology**: The system is built around several key components working in harmony. Python scripts ([`passed_exams.py`](passed_exams.py), [`fetch_credly_badges.py`](fetch_credly_badges.py)) handle data fetching from APIs and CSV generation. The [`ai_exam_recommender.py`](ai_exam_recommender.py) script leverages AI to analyze your certification trajectory and suggest next steps from a curated list of priority exams. The visualization magic happens in [`index.html`](index.html), which uses Plotly.js to create an interactive timeline that intelligently adapts its display based on available data sources—showing a dropdown to switch between Microsoft exams and Credly badges when both are available, or automatically displaying whichever source has data.
+
+**Usage**: Getting started is straightforward for developers and certification enthusiasts alike. Fork this repository, configure two simple secrets (your Microsoft Learn transcript share ID and Credly username), and connect it to Azure Static Web Apps for free hosting. GitHub Actions automation handles the heavy lifting, running daily at midnight UTC to fetch fresh data and update your dashboard automatically. For local development, simply install Python dependencies (`pip install requests openai`), run the data fetching scripts, and serve the HTML locally (`python -m http.server 8000`). The dashboard works seamlessly whether you're tracking Microsoft exams only, Credly badges only, or both combined.
+
+**Current Status**: This is a hobby project that demonstrates creative use of public APIs and modern web technologies. The Microsoft Learn API integration is unofficial and not documented, making it suitable for personal projects but not production applications. The system gracefully handles missing data sources and includes fallback mechanisms when APIs are unavailable. Known limitations include dependency on external API availability and the unofficial nature of the Microsoft Learn integration.
+
+**Contributing**: The codebase is designed for easy contribution and customization. Key areas where future contributors can help include expanding the AI recommendation logic, adding support for additional certification providers, improving the visualization interface, and enhancing error handling. Check the [README.md](README.md) for detailed setup instructions, file structure documentation, and development guidelines.
 
 ## High-Level Overview
 
